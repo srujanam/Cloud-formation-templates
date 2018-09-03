@@ -1,0 +1,134 @@
+{
+   "AWSTemplateFormatVersion" : "2010-09-09",
+    "Parameters" : {
+      "LaunchEnvironment" : {
+        "Type" : "String",
+        "Default" : "test",
+        "AllowedValues" : ["test", "dev", "pre-prod","prod"],
+        "Description" : "Enter \"test\", \"dev\", \"pre-prod\",\"prod\" .This will create prefix with this bucketname"
+      }
+    },
+      "Resources" : {
+     "S3Bucket1" : {
+        "Type" : "AWS::S3::Bucket",
+        "Properties" : {
+           "BucketName" : { "Fn::Join" : ["-", [{ "Ref" : "LaunchEnvironment" },"buket1"   ]]},
+           "WebsiteConfiguration" : {
+              "IndexDocument" : "index.html",
+              "ErrorDocument" : "error.html"
+
+           }
+        }
+
+     },
+     "s3bucketpolicy1" : {
+      "Type" : "AWS::S3::BucketPolicy",
+      "Properties" : {
+        "Bucket" : {"Ref" : "S3Bucket1"},
+        "PolicyDocument": {
+          "Id": "Policygetfors31",
+          "Version": "2012-10-17",
+          "Statement":[{
+            "Action":["s3:GetObject"],
+            "Effect":"Allow",
+            "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "S3Bucket1" } , "/*" ]]},
+            "Principal":"*",
+            "Condition":{
+              "StringLike":{
+                "aws:Referer":["*"]
+              }
+            }
+          },
+          {
+              "Action": [
+                  "s3:DeleteObject",
+                  "s3:GetObject",
+                  "s3:PutObject"
+                ],
+              "Effect":"Allow",
+              "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "S3Bucket1" } , "/*" ]]},
+              "Principal":"*",
+              "Condition":{
+                "StringLike":{
+                  "aws:Referer":["*"]
+                }
+              }
+            }
+
+      ]
+        }
+      }
+    },  "S3Bucket2" : {
+        "Type" : "AWS::S3::Bucket",
+        "Properties" : {
+           "BucketName" : { "Fn::Join" : ["-", [{ "Ref" : "LaunchEnvironment" },"buket2"   ]]},
+           "WebsiteConfiguration" : {
+              "IndexDocument" : "index.html",
+              "ErrorDocument" : "error.html"
+
+           }
+        }
+
+     },
+     "s3bucketpolicy2" : {
+      "Type" : "AWS::S3::BucketPolicy",
+      "Properties" : {
+        "Bucket" : {"Ref" : "S3Bucket2"},
+        "PolicyDocument": {
+          "Id": "Policygetfors32",
+          "Version": "2012-10-17",
+          "Statement":[{
+            "Action":["s3:GetObject"],
+            "Effect":"Allow",
+            "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "S3Bucket2" } , "/*" ]]},
+            "Principal":"*",
+            "Condition":{
+              "StringLike":{
+                "aws:Referer":["*"]
+              }
+            }
+          },
+          {
+              "Action": [
+                  "s3:DeleteObject",
+                  "s3:GetObject",
+                  "s3:PutObject"
+                ],
+              "Effect":"Allow",
+              "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "S3Bucket2" } , "/*" ]]},
+              "Principal":"*",
+              "Condition":{
+                "StringLike":{
+                  "aws:Referer":["*"]
+                }
+              }
+            }
+
+      ]
+        }
+      }
+    }
+  },
+
+  "Outputs" : {
+     "WebsiteURL1" : {
+        "Value" : { "Fn::GetAtt" : [ "S3Bucket1", "WebsiteURL" ] },
+        "Description" : "website hosted on 1st S3"
+     },
+     "S3BucketSecureURL1" : {
+        "Value" : { "Fn::Join" : [
+           "", [ "https://", { "Fn::GetAtt" : [ "S3Bucket1", "DomainName" ] } ]
+        ] },
+        "Description" : "Name of 1st S3 bucket"
+     },
+     "WebsiteURL2" : {
+        "Value" : { "Fn::GetAtt" : [ "S3Bucket2", "WebsiteURL" ] },
+        "Description" : "website hosted on 2nd S3"
+     },
+     "S3BucketSecureURL2" : {
+        "Value" : { "Fn::Join" : [
+           "", [ "https://", { "Fn::GetAtt" : [ "S3Bucket2", "DomainName" ] } ]
+        ] },
+        "Description" : "Name of S3 2nd bucket"
+     }
+  }}

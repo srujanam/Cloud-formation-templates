@@ -1,0 +1,41 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  "Description" : "Creating SNS topic and subscription",
+  "Parameters" : {
+    "SubscriptionProtocol" : {
+      "Type" : "String",
+      "Description" : "Seclect the subscription Protocal",
+      "AllowedValues" : [ "http","https","email","email-json","sms","sqs","application","lambda" ],
+      "Default" : "email"
+    },
+    "SubscriptionEndPoint":{
+    "Type":"String",
+    "Description":"The endpoint that receives notifications from the Amazon SNS topic"
+  },
+    "SNSTopicName" : {
+      "Type" : "String",
+      "Default" : "test",
+      "AllowedValues" : ["test", "dev", "pre-prod","prod"],
+      "Description" : "Enter \"test\", \"dev\", \"pre-prod\",\"prod\" .This will create prefix"
+      }
+    },
+  "Resources" : {
+    "SNSTopic" : {
+      "Type" : "AWS::SNS::Topic",
+      "Properties" : {
+        "TopicName" : { "Ref" : "SNSTopicName"},
+        "DisplayName" : "Sample"
+        }
+    },
+    "SNSSubscription" : {
+      "Type" : "AWS::SNS::Subscription",
+      "Properties" : {
+        "Endpoint" : { "Ref":"SubscriptionEndPoint"},
+        "Protocol" : {"Ref":"SubscriptionProtocol"},
+        "TopicArn" : {"Ref":"SNSTopic"}
+
+        }
+    },
+
+    }
+}

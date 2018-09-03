@@ -1,0 +1,114 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "awslambda1": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Handler": "mainfunc.myfunc",
+                "Role": "arn:aws:iam::160699259667:role/service-role/LamdatoS3_bis",
+                "Code": {
+                    "S3Bucket": "testbucketbis",
+                    "S3Key": "mainfunc.zip"
+                },
+                "Timeout": 300,
+                "Runtime": "python3.6",
+                "MemorySize": 128
+            }
+        },"awslambda2": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Handler": "mainfunc.myfunc",
+                "Role": "arn:aws:iam::160699259667:role/service-role/LamdatoS3_bis",
+                "Code": {
+                    "S3Bucket": "testbucketbis",
+                    "S3Key": "mainfunc.zip"
+                },
+                "Timeout": 300,
+                "Runtime": "python3.6",
+                "MemorySize": 128
+            }
+        },"awslambda3": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Handler": "mainfunc.myfunc",
+                "Role": "arn:aws:iam::160699259667:role/service-role/LamdatoS3_bis",
+                "Code": {
+                    "S3Bucket": "testbucketbis",
+                    "S3Key": "mainfunc.zip"
+                },
+                "Timeout": 300,
+                "Runtime": "python3.6",
+                "MemorySize": 128
+            }
+        },"awslambda4": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Handler": "mainfunc.myfunc",
+                "Role": "arn:aws:iam::160699259667:role/service-role/LamdatoS3_bis",
+                "Code": {
+                    "S3Bucket": "testbucketbis",
+                    "S3Key": "mainfunc.zip"
+                },
+                "Timeout": 300,
+                "Runtime": "python3.6",
+                "MemorySize": 128
+            }
+        },"awslambda5": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Handler": "mainfunc.myfunc",
+                "Role": "arn:aws:iam::160699259667:role/service-role/LamdatoS3_bis",
+                "Code": {
+                    "S3Bucket": "testbucketbis",
+                    "S3Key": "mainfunc.zip"
+                },
+                "Timeout": 300,
+                "Runtime": "python3.6",
+                "MemorySize": 128
+            }
+        },"awslambda6": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Handler": "mainfunc.myfunc",
+                "Role": "arn:aws:iam::160699259667:role/service-role/LamdatoS3_bis",
+                "Code": {
+                    "S3Bucket": "testbucketbis",
+                    "S3Key": "mainfunc.zip"
+                },
+                "Timeout": 300,
+                "Runtime": "python3.6",
+                "MemorySize": 128
+            }
+        },"awslambda7": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Handler": "mainfunc.myfunc",
+                "Role": "arn:aws:iam::160699259667:role/service-role/LamdatoS3_bis",
+                "Code": {
+                    "S3Bucket": "testbucketbis",
+                    "S3Key": "mainfunc.zip"
+                },
+                "Timeout": 300,
+                "Runtime": "python3.6",
+                "MemorySize": 128
+            }
+        }
+       
+    },
+    "Metadata": {
+        "AWS::CloudFormation::Designer": {
+            "f07665f3-7360-49c2-a957-1fa6e40fb023": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 310,
+                    "y": 150
+                },
+                "z": 0,
+                "embeds": []
+            }
+        }
+    }
+}
